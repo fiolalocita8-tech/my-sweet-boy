@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>for my حبيبي 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#F8F3EC;
+color:#6B5E55;
+font-family:'Source Serif 4', serif;
+overflow-x:hidden;
+}
+
+/* ===== STARS ===== */
+.stars{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:-1;
+transition:transform .2s ease;
+}
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 4s infinite ease-in-out, floatStar 12s infinite linear;
+}
+
+@keyframes twinkle{
+0%,100%{opacity:.2; transform:scale(.6);}
+50%{opacity:1; transform:scale(1.2);}
+}
+
+@keyframes floatStar{
+from{transform:translateY(0);}
+to{transform:translateY(-40px);}
+}
+
+/* ===== COVER ===== */
+.cover{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+transition:all 1.2s ease;
+}
+
+.cover h1{
+font-family:'Cormorant Garamond', serif;
+font-size:3.5rem;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-size:1.1rem;
+max-width:420px;
+line-height:1.6;
+margin-bottom:30px;
+}
+
+/* ===== BUTTON ===== */
+.button{
+padding:14px 32px;
+background:white;
+border:none;
+border-radius:999px;
+cursor:pointer;
+font-size:1rem;
+font-family:inherit;
+color:#6B5E55;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.button:hover{
+transform:translateY(-4px) scale(1.03);
+}
+
+/* ===== CONTENT ===== */
+#content{
+display:none;
+opacity:0;
+}
+
+#content.show{
+animation:fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px); filter:blur(8px);}
+to{opacity:1; transform:translateY(0); filter:blur(0);}
+}
+
+/* ===== CARD ===== */
+.card{
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(10px);
+border-radius:25px;
+padding:25px;
+margin:25px auto;
+max-width:900px;
+box-shadow:0 10px 40px rgba(0,0,0,.08);
+opacity:0;
+transform:translateY(30px);
+}
+
+.card.show{
+animation:cardIn 1s ease forwards;
+}
+
+@keyframes cardIn{
+to{opacity:1; transform:translateY(0);}
+}
+
+.section-title{
+text-align:center;
+font-size:1.8rem;
+margin-bottom:20px;
+font-family:'Cormorant Garamond', serif;
+}
+
+/* ===== VIDEO ===== */
+video{
+width:100%;
+border-radius:18px;
+}
+
+/* ===== GALLERY ===== */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:12px;
+}
+
+.gallery img{
+width:100%;
+aspect-ratio:3/4;
+object-fit:cover;
+border-radius:14px;
+transition:.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* ===== END ===== */
+.end{
+text-align:center;
+padding:80px 20px;
+}
+
+.end h2{
+font-size:2.5rem;
+font-family:'Cormorant Garamond', serif;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+.cover h1{font-size:2.8rem;}
+.card{margin:15px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- COVER -->
+<section class="cover" id="cover">
+<h1>for my حبيبي 🤍</h1>
+<p class="subtitle">open this whenever life feels a little too heavy.</p>
+<button class="button" onclick="openSite()">click me</button>
+</section>
+
+<!-- AUDIO -->
+<audio id="bgm" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- CONTENT -->
+<div id="content">
+
+<div class="card">
+<video controls>
+<source src="video.mp4" type="video/mp4">
+</video>
+<p style="text-align:center;margin-top:10px;">our little universe 🤍</p>
+</div>
+
+<div class="card">
+<h2 class="section-title">a few memories 🤍</h2>
+<div class="gallery">
+<img src="1.jpg"><img src="2.jpg"><img src="3.jpg"><img src="4.jpg">
+<img src="5.jpg"><img src="6.jpg"><img src="7.jpg"><img src="8.jpg">
+<img src="9.jpg"><img src="10.jpg"><img src="11.jpg"><img src="12.jpg">
+</div>
+</div>
+
+<div class="card" style="text-align:center;">
+<a class="button" target="_blank" href="https://youtu.be/85fJT2dB_i8">
+🎵 play this while reading
+</a>
+</div>
+
+<div class="card">
+<p style="line-height:1.8;">
+hey bb ^^ i know things have been really heavy for you lately...
+but i just want you to remember that i'm here, always 🤍
+</p>
+</div>
+
+<div class="end">
+<h2>look at me.</h2>
+<p>you have me. always 🤍</p>
+<br>
+<p>i love you & i'm proud of you.</p>
+</div>
+
+</div>
+
+<script>
+
+/* ===== stars ===== */
+const stars = document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+let s=document.createElement("div");
+s.classList.add("star");
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+stars.appendChild(s);
+}
+
+/* ===== open site ===== */
+function openSite(){
+document.getElementById("cover").style.display="none";
+
+const content=document.getElementById("content");
+content.style.display="block";
+content.classList.add("show");
+
+document.querySelectorAll(".card").forEach((c,i)=>{
+setTimeout(()=>c.classList.add("show"),300*i);
+});
+
+/* music */
+const bgm=document.getElementById("bgm");
+bgm.volume=0;
+bgm.play().catch(()=>{});
+
+let v=0;
+let fade=setInterval(()=>{
+if(v<0.6){v+=0.05;bgm.volume=v;}
+else clearInterval(fade);
+},200);
+}
+
+/* ===== parallax stars ===== */
+document.addEventListener("mousemove",(e)=>{
+stars.style.transform=
+`translate(${e.clientX*0.01}px, ${e.clientY*0.01}px)`;
+});
+
+</script>
+
+</body>
+</html>
