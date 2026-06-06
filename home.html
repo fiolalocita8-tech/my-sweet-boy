@@ -51,7 +51,7 @@ padding:20px;
 }
 
 .cover h1{
-font-family:'Cormorant Garamond', serif;
+font-family:'Cormorant Garamond';
 font-size:3rem;
 margin-bottom:10px;
 }
@@ -83,24 +83,20 @@ max-width:900px;
 border-radius:20px;
 backdrop-filter:blur(10px);
 box-shadow:0 10px 40px rgba(0,0,0,.08);
-
 opacity:0;
 transform:translateY(30px);
 }
 
-.card.show{
-animation:cardIn 1s ease forwards;
-}
+.card.show{animation:cardIn 1s ease forwards;}
 
 @keyframes cardIn{
 to{opacity:1;transform:translateY(0);}
 }
 
-/* SURAT EFFECT */
+/* LETTER */
 .letter-card{
-overflow:hidden;
-transform-origin:top;
 animation:openLetter 1.2s ease forwards;
+transform-origin:top;
 }
 
 @keyframes openLetter{
@@ -108,22 +104,21 @@ animation:openLetter 1.2s ease forwards;
 100%{opacity:1;transform:scaleY(1);filter:blur(0);}
 }
 
-.letter-text{
+.reveal{
 opacity:0;
-animation:fadeText 2.5s ease forwards;
-animation-delay:1s;
-line-height:1.8;
+transform:translateY(20px);
+transition:all 1s ease;
 }
 
-@keyframes fadeText{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;transform:translateY(0);}
+.reveal.show{
+opacity:1;
+transform:translateY(0);
 }
 
 /* TITLE */
 .section-title{
 text-align:center;
-font-family:'Cormorant Garamond', serif;
+font-family:'Cormorant Garamond';
 margin-bottom:20px;
 font-size:1.8rem;
 }
@@ -138,11 +133,13 @@ animation:scroll 25s linear infinite;
 }
 
 .track img{
-width:180px;
-height:240px;
-object-fit:cover;
-border-radius:12px;
+height:auto;
+width:auto;
+max-height:260px;
+max-width:200px;
+border-radius:14px;
 flex-shrink:0;
+display:block;
 }
 
 @keyframes scroll{
@@ -157,13 +154,8 @@ padding:80px 20px;
 }
 
 .end h2{
-font-family:'Cormorant Garamond', serif;
+font-family:'Cormorant Garamond';
 font-size:2.5rem;
-}
-
-@media(max-width:768px){
-.cover h1{font-size:2.5rem;}
-.track img{width:150px;height:210px;}
 }
 </style>
 </head>
@@ -172,33 +164,38 @@ font-size:2.5rem;
 
 <div class="stars" id="stars"></div>
 
-<!-- COVER -->
 <section class="cover" id="cover">
 <h1>for my حبيبي 🤍</h1>
 <p class="subtitle">open this whenever life feels heavy</p>
 <button onclick="openSite()">enter</button>
 </section>
 
-<!-- MUSIC -->
 <audio id="bgm" loop>
 <source src="John Lennon - Beautiful Boy (Darling Boy) - Instrumental.mp4" type="audio/mpeg">
 </audio>
 
-<!-- CONTENT -->
 <div id="content">
 
-<!-- LETTER -->
 <div class="card letter-card">
-<p class="letter-text">
-hey bb ^^
 
-i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it. i know you don't always talk about everything you're feeling, but i can tell you've been carrying a lot on your shoulders lately. and honestly, i wish i could take some of that weight away from you 🥹🥹
+<p class="reveal">hey bb ^^</p>
 
-that's why i need you to know something, bb. i'm so proud of you. not because of the results, not because everything is going perfectly, but because of everything you've been doing to get there. i see how hard you've been trying, even when life keeps throwing things at you. sometimes you're so focused on the destination that you forget how far you've already come, and the process you're going through right now is already something to be proud of. you don't have to earn my love by being successful, bb. i'm already proud of you, even in the middle of all this. and when your mind gets too loud and you start doubting yourself, look at me, okay? you have me. let me be your support system when things get heavy. we'll get through all of this together, one step at a time. no matter what happens, i'll always be proud of you—not just for what you achieve, but for the person you are and the strength you show every single day 🥹🥹🥹🥹🥹🥹🫶🏻🤍🤍💗💗💗
-</p>
+<p class="reveal">i know things have been really heavy for you lately. i know there's been so much on your mind...</p>
+
+<p class="reveal">i know you don't always talk about everything you're feeling, but i can tell you've been carrying a lot...</p>
+
+<p class="reveal">that's why i'm so proud of you. not because of results, but because you're still trying 🤍</p>
+
+<p class="reveal">you don't have to earn my love. i'm already proud of you.</p>
+
+<p class="reveal">and when your mind gets too loud, look at me. you have me.</p>
+
+<p class="reveal">we'll get through everything together, step by step.</p>
+
+<p class="reveal">no matter what happens, i'm proud of you always 🥹🤍</p>
+
 </div>
 
-<!-- MEMORIES -->
 <div class="card">
 <h2 class="section-title">a few memories 🤍</h2>
 
@@ -220,12 +217,9 @@ that's why i need you to know something, bb. i'm so proud of you. not because of
 </div>
 </div>
 
-<!-- END -->
 <div class="end">
 <h2>look at me.</h2>
 <p>you have me. always 🤍</p>
-<br>
-<p>i love you & i'm proud of you.</p>
 </div>
 
 </div>
@@ -246,15 +240,28 @@ stars.appendChild(s);
 /* open */
 function openSite(){
 document.getElementById("cover").style.display="none";
-
-const content=document.getElementById("content");
-content.style.display="block";
+document.getElementById("content").style.display="block";
 
 document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),300*i);
 });
 
-/* music fade */
+/* reveal text on scroll */
+const reveals=document.querySelectorAll(".reveal");
+
+function checkScroll(){
+reveals.forEach(el=>{
+const top=el.getBoundingClientRect().top;
+if(top<window.innerHeight-80){
+el.classList.add("show");
+}
+});
+}
+
+window.addEventListener("scroll",checkScroll);
+checkScroll();
+
+/* music */
 const bgm=document.getElementById("bgm");
 bgm.volume=0;
 bgm.play().catch(()=>{});
