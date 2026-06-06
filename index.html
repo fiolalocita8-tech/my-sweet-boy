@@ -135,12 +135,6 @@ margin-bottom:20px;
 font-family:'Cormorant Garamond', serif;
 }
 
-/* ===== VIDEO ===== */
-video{
-width:100%;
-border-radius:18px;
-}
-
 /* ===== GALLERY ===== */
 .gallery{
 display:grid;
@@ -199,13 +193,6 @@ font-family:'Cormorant Garamond', serif;
 <div id="content">
 
 <div class="card">
-<video controls>
-<source src="video.mp4" type="video/mp4">
-</video>
-<p style="text-align:center;margin-top:10px;">our little universe 🤍</p>
-</div>
-
-<div class="card">
 <h2 class="section-title">a few memories 🤍</h2>
 <div class="gallery">
 <img src="1.jpg"><img src="2.jpg"><img src="3.jpg"><img src="4.jpg">
@@ -238,8 +225,8 @@ but i just want you to remember that i'm here, always 🤍
 
 <script>
 
-/* ===== stars ===== */
-const stars = document.getElementById("stars");
+/* stars */
+const stars=document.getElementById("stars");
 
 for(let i=0;i<120;i++){
 let s=document.createElement("div");
@@ -249,7 +236,7 @@ s.style.top=Math.random()*100+"%";
 stars.appendChild(s);
 }
 
-/* ===== open site ===== */
+/* open site */
 function openSite(){
 document.getElementById("cover").style.display="none";
 
@@ -273,7 +260,7 @@ else clearInterval(fade);
 },200);
 }
 
-/* ===== parallax stars ===== */
+/* parallax stars */
 document.addEventListener("mousemove",(e)=>{
 stars.style.transform=
 `translate(${e.clientX*0.01}px, ${e.clientY*0.01}px)`;
