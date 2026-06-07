@@ -118,9 +118,10 @@ transform:translateY(0);
 /* TYPEWRITER */
 .typewriter{
 font-size:1rem;
-line-height:1.8;
-margin-bottom:18px;
+line-height:1.9;
+margin-bottom:22px;
 white-space:pre-wrap;
+min-height:1em;
 }
 
 /* MEMORIES */
@@ -250,9 +251,34 @@ document.getElementById("cover").style.display="none";
 document.getElementById("content").style.display="block";
 
 /* cards */
-document.querySelectorAll(".card").forEach((c,i)=>{
-setTimeout(()=>c.classList.add("show"),i*300);
+const paragraphs=document.querySelectorAll(".typewriter");
+
+paragraphs.forEach(el=>{
+
+el.dataset.text=el.textContent.trim();
+
+el.textContent="";
+
 });
+
+let delay=500;
+
+paragraphs.forEach(el=>{
+
+setTimeout(()=>{
+
+typeEffect(
+el,
+el.dataset.text,
+18
+);
+
+},delay);
+
+delay += (el.dataset.text.length*18)+600;
+
+});
+
 
 /* FIX TYPEWRITER */
 setTimeout(()=>{
