@@ -17,80 +17,26 @@ font-family:'Source Serif 4', serif;
 overflow-x:hidden;
 }
 
-.stars{
-position:fixed;
-inset:0;
-pointer-events:none;
-z-index:0;
-}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:.6;animation:twinkle 6s infinite;}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.6);}50%{opacity:1;transform:scale(1.2);}}
 
-.star{
-position:absolute;
-width:2px;
-height:2px;
-background:white;
-border-radius:50%;
-opacity:.6;
-animation:twinkle 6s infinite ease-in-out;
-}
-
-@keyframes twinkle{
-0%,100%{opacity:.2;transform:scale(.6);}
-50%{opacity:1;transform:scale(1.2);}
-}
-
-#magic-layer{
-position:fixed;
-inset:0;
-pointer-events:none;
-z-index:1;
-}
-
-.magic{
-position:absolute;
-top:-20px;
-animation:fall linear forwards;
-opacity:0;
-}
-
-@keyframes fall{
-0%{transform:translateY(0);opacity:0;}
-10%{opacity:1;}
-100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
-}
+#magic-layer{position:fixed;inset:0;pointer-events:none;z-index:1;}
+.magic{position:absolute;top:-20px;animation:fall linear forwards;opacity:0;}
+@keyframes fall{0%{transform:translateY(0);}100%{transform:translateY(110vh) rotate(360deg);opacity:0;}}
 
 .cover{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-position:relative;
-z-index:2;
+height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;z-index:2;position:relative;
 }
 
-.cover h1{
-font-family:'Cormorant Garamond';
-font-size:3rem;
-margin-bottom:10px;
-}
-
+.cover h1{font-size:3rem;font-family:'Cormorant Garamond';}
 .subtitle{opacity:.8;margin-bottom:20px;}
 
 button{
-padding:14px 30px;
-border:none;
-border-radius:999px;
-background:white;
-cursor:pointer;
+padding:14px 30px;border:none;border-radius:999px;background:white;cursor:pointer;
 }
 
-#content{
-display:none;
-position:relative;
-z-index:2;
-}
+#content{display:none;position:relative;z-index:2;}
 
 .card{
 background:rgba(255,255,255,.85);
@@ -104,29 +50,15 @@ box-shadow:0 10px 40px rgba(0,0,0,.08);
 .typewriter{
 white-space:pre-wrap;
 word-break:break-word;
-overflow-wrap:break-word;
 line-height:1.9;
 margin-bottom:20px;
 min-height:1em;
 }
 
-.track{
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
-}
+.track{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.track img{width:45%;border-radius:16px;}
 
-.track img{
-width:45%;
-border-radius:16px;
-object-fit:cover;
-}
-
-.end{
-text-align:center;
-padding:60px 20px;
-}
+.end{text-align:center;padding:60px 20px;}
 </style>
 </head>
 
@@ -149,15 +81,16 @@ padding:60px 20px;
 
 <div class="card">
 
+<!-- 🔥 FULL LONG TEXT RESTORED -->
 <p class="typewriter" data-text="hey bb ^^"></p>
 
-<p class="typewriter" data-text="i know things have been really heavy for you lately."></p>
+<p class="typewriter" data-text="i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it. and honestly, i wish i could take some of that weight away from you 🥹🥹"></p>
 
-<p class="typewriter" data-text="i'm so proud of you no matter what happens 🤍"></p>
+<p class="typewriter" data-text="that's why i need you to know something, bb. i'm so proud of you. not because of results, but because of how hard you're still trying. even when life feels heavy, you're still here going forward."></p>
 
-<p class="typewriter" data-text="you don't have to carry everything alone."></p>
+<p class="typewriter" data-text="you don't have to carry everything alone. i'm here with you, always. you don't have to earn love by being perfect."></p>
 
-<p class="typewriter" data-text="im standing here 4 u 🤍"></p>
+<p class="typewriter" data-text="let me be your support system when things get heavy. we'll get through all of this together, one step at a time. no matter what happens, i'll always be proud of you 🤍"></p>
 
 </div>
 
@@ -176,33 +109,33 @@ padding:60px 20px;
 
 <script>
 
-/* stars SAFE */
-const stars = document.getElementById("stars");
+/* stars safe */
+const stars=document.getElementById("stars");
 if(stars){
-  for(let i=0;i<80;i++){
-    let s=document.createElement("div");
-    s.className="star";
-    s.style.left=Math.random()*100+"%";
-    s.style.top=Math.random()*100+"%";
-    stars.appendChild(s);
-  }
+for(let i=0;i<80;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+stars.appendChild(s);
+}
 }
 
 /* magic */
 function createMagic(){
-  const el=document.createElement("div");
-  el.className="magic";
-  const items=["✨","🤍","💗","💫"];
-  el.innerText=items[Math.floor(Math.random()*items.length)];
-  el.style.left=Math.random()*100+"vw";
-  el.style.fontSize=(Math.random()*14+10)+"px";
-  el.style.animationDuration=(Math.random()*4+4)+"s";
-  document.getElementById("magic-layer").appendChild(el);
-  setTimeout(()=>el.remove(),8000);
+const el=document.createElement("div");
+el.className="magic";
+const items=["✨","🤍","💗","💫"];
+el.innerText=items[Math.floor(Math.random()*items.length)];
+el.style.left=Math.random()*100+"vw";
+el.style.fontSize=(Math.random()*14+10)+"px";
+el.style.animationDuration=(Math.random()*4+4)+"s";
+document.getElementById("magic-layer").appendChild(el);
+setTimeout(()=>el.remove(),8000);
 }
 setInterval(createMagic,350);
 
-/* typewriter SAFE */
+/* typewriter */
 function typeEffect(el,text){
 return new Promise(resolve=>{
 let i=0;
@@ -217,42 +150,35 @@ run();
 });
 }
 
-/* ENTER FINAL STABLE */
+/* ENTER FIX */
 document.getElementById("enterBtn").addEventListener("click", async ()=>{
 
 document.getElementById("cover").style.display="none";
 document.getElementById("content").style.display="block";
 
-const bgm = document.getElementById("bgm");
+const bgm=document.getElementById("bgm");
 
-/* music start */
+/* music */
 try{
-bgm.volume = 0;
+bgm.volume=0;
 await bgm.play();
 
-let v = 0;
-let fade = setInterval(()=>{
-if(v < 0.5){
-v += 0.02;
-bgm.volume = v;
-}else clearInterval(fade);
+let v=0;
+let fade=setInterval(()=>{
+if(v<0.5){v+=0.02;bgm.volume=v;}
+else clearInterval(fade);
 },120);
 
 }catch(e){
-console.log("audio error:", e);
+console.log(e);
 }
 
-/* cards */
-document.querySelectorAll(".card").forEach((c,i)=>{
-setTimeout(()=>c.classList.add("show"), i*200);
-});
-
-/* TEXT SAFE LOOP */
-const paragraphs = Array.from(document.querySelectorAll(".typewriter"));
+/* text SAFE FULL */
+const paragraphs=Array.from(document.querySelectorAll(".typewriter"));
 
 for(const el of paragraphs){
-const text = el.dataset.text || "";
-await typeEffect(el, text);
+const text=el.dataset.text || "";
+await typeEffect(el,text);
 await new Promise(r=>setTimeout(r,400));
 }
 
