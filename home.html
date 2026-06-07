@@ -17,17 +17,18 @@ font-family:'Source Serif 4', serif;
 overflow-x:hidden;
 }
 
-/* STARS */
+/* ⭐ STATIC STARS BACKGROUND */
 .stars{
 position:fixed;
 inset:0;
 pointer-events:none;
-z-index:-1;
+z-index:0;
 }
 
 .star{
 position:absolute;
-width:2px;height:2px;
+width:2px;
+height:2px;
 background:white;
 border-radius:50%;
 opacity:.6;
@@ -39,6 +40,29 @@ animation:twinkle 6s infinite ease-in-out;
 50%{opacity:1;transform:scale(1.2);}
 }
 
+/* 💖 FALLING MAGIC LAYER */
+#magic-layer{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
+}
+
+.magic{
+position:absolute;
+top:-20px;
+opacity:0;
+animation:fall linear forwards;
+filter:blur(0.3px);
+}
+
+@keyframes fall{
+0%{transform:translateY(0) scale(.8);opacity:0;}
+10%{opacity:1;}
+100%{transform:translateY(110vh) rotate(360deg) scale(1.2);opacity:0;}
+}
+
 /* COVER */
 .cover{
 height:100vh;
@@ -48,6 +72,8 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
+position:relative;
+z-index:2;
 }
 
 .cover h1{
@@ -73,7 +99,11 @@ box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 /* CONTENT */
-#content{display:none;}
+#content{
+display:none;
+position:relative;
+z-index:2;
+}
 
 .card{
 background:rgba(255,255,255,.85);
@@ -85,36 +115,21 @@ backdrop-filter:blur(10px);
 box-shadow:0 10px 40px rgba(0,0,0,.08);
 opacity:0;
 transform:translateY(30px);
+transition:0.6s ease;
 }
 
 .card.show{
-animation:cardIn 1s ease forwards;
-}
-
-@keyframes cardIn{
-to{opacity:1;transform:translateY(0);}
-}
-
-/* LETTER */
-.letter-card{
-animation:openLetter 1.2s ease forwards;
-transform-origin:top;
-}
-
-@keyframes openLetter{
-0%{opacity:0;transform:scaleY(0.8);filter:blur(8px);}
-100%{opacity:1;transform:scaleY(1);filter:blur(0);}
-}
-
-.reveal{
-opacity:0;
-transform:translateY(20px);
-transition:all 1s ease;
-}
-
-.reveal.show{
 opacity:1;
 transform:translateY(0);
+}
+
+/* TYPEWRITER */
+.typewriter{
+font-size:1rem;
+line-height:1.8;
+margin-bottom:18px;
+white-space:pre-wrap;
+opacity:0.95;
 }
 
 /* TITLE */
@@ -130,23 +145,22 @@ font-size:1.8rem;
 
 .track{
 display:flex;
-gap:10px;
-animation:scroll 25s linear infinite;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
 }
 
 .track img{
-height:auto;
-width:auto;
-max-height:260px;
-max-width:200px;
-border-radius:14px;
-flex-shrink:0;
-display:block;
+width:45%;
+max-width:320px;
+border-radius:16px;
+object-fit:cover;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+transition:transform .4s ease;
 }
 
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+.track img:hover{
+transform:scale(1.03);
 }
 
 /* END */
@@ -164,49 +178,39 @@ font-size:2.5rem;
 
 <body>
 
+<!-- stars -->
 <div class="stars" id="stars"></div>
 
+<!-- falling magic -->
+<div id="magic-layer"></div>
+
+<!-- COVER -->
 <section class="cover" id="cover">
 <h1>for my حبيبي 🤍</h1>
 <p class="subtitle">open this whenever life feels heavy</p>
 <button onclick="openSite()">enter</button>
 </section>
 
+<!-- AUDIO -->
 <audio id="bgm" loop>
 <source src="John Lennon - Beautiful Boy (Darling Boy) - Instrumental.mp4" type="audio/mpeg">
 </audio>
 
+<!-- CONTENT -->
 <div id="content">
 
-<!-- LETTER (FULL TEXT UTUH + PARAGRAF ASLI KAMU) -->
-<div class="card letter-card">
-
-<p class="reveal">hey bb ^^</p>
-
-<p class="reveal">i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it. i know you don't always talk about everything you're feeling, but i can tell you've been carrying a lot on your shoulders lately. and honestly, i wish i could take some of that weight away from you 🥹🥹</p>
-
-<p class="reveal">that's why i need you to know something, bb. i'm so proud of you. not because of the results, not because everything is going perfectly, but because of everything you've been doing to get there. i see how hard you've been trying, even when life keeps throwing things at you. sometimes you're so focused on the destination that you forget how far you've already come, and the process you're going through right now is already something to be proud of. you don't have to earn my love by being successful, bb. i'm already proud of you, even in the middle of all this. and when your mind gets too loud and you start doubting yourself, look at me, okay? you have me. let me be your support system when things get heavy. we'll get through all of this together, one step at a time. no matter what happens, i'll always be proud of you—not just for what you achieve, but for the person you are and the strength you show every single day 🥹🥹🥹🥹🥹🥹🫶🏻🫶🏻🫶🏻🤍🤍🤍🤍🤍🤍💗💗💗💗💗</p>
-
+<div class="card">
+<p class="typewriter" data-text="hey bb ^^"></p>
+<p class="typewriter" data-text="i know things have been really heavy for you lately. i know there's been so much on your mind..."></p>
+<p class="typewriter" data-text="that's why i need you to know something, bb. i'm so proud of you. always. 🤍"></p>
 </div>
 
-<!-- MEMORIES -->
 <div class="card">
-<h2 class="section-title">a few memories 🤍</h2>
-
+<h2 class="section-title"> reminder 🫶🏻</h2>
 <div class="carousel">
 <div class="track">
 <img src="IMG_5896.jpeg">
-<img src="IMG_5902.jpeg">
-<img src="IMG_5903.jpeg">
-<img src="IMG_5904.jpeg">
-<img src="IMG_5905.jpeg">
-<img src="IMG_5908.jpeg">
 <img src="IMG_5909.jpeg">
-<img src="IMG_5910.jpeg">
-<img src="IMG_5911.jpeg">
-<img src="IMG_5912.jpeg">
-<img src="IMG_5913.jpeg">
-<img src="IMG_5914.jpeg">
 </div>
 </div>
 </div>
@@ -220,40 +224,69 @@ font-size:2.5rem;
 
 <script>
 
-/* stars */
-const stars=document.getElementById("stars");
+/* ⭐ STARS */
+const stars = document.getElementById("stars");
 
-for(let i=0;i<120;i++){
+for(let i=0;i<80;i++){
 let s=document.createElement("div");
 s.classList.add("star");
 s.style.left=Math.random()*100+"%";
 s.style.top=Math.random()*100+"%";
+s.style.animationDelay=Math.random()*6+"s";
 stars.appendChild(s);
 }
 
-/* open */
+/* 💖 MAGIC FALLING */
+function createMagic(){
+const el=document.createElement("div");
+el.classList.add("magic");
+
+const items=["✨","🤍","💗","💫"];
+el.innerText=items[Math.floor(Math.random()*items.length)];
+
+el.style.left=Math.random()*100+"vw";
+el.style.fontSize=(Math.random()*14+10)+"px";
+el.style.animationDuration=(Math.random()*4+4)+"s";
+
+document.getElementById("magic-layer").appendChild(el);
+
+setTimeout(()=>el.remove(),8000);
+}
+
+setInterval(createMagic,350);
+
+/* ✍️ TYPEWRITER */
+function typeEffect(el,text,speed=32){
+let i=0;
+el.textContent="";
+
+function typing(){
+if(i<text.length){
+el.textContent+=text.charAt(i);
+i++;
+setTimeout(typing,speed);
+}
+}
+
+setTimeout(typing,400);
+}
+
+/* OPEN SITE */
 function openSite(){
 document.getElementById("cover").style.display="none";
 document.getElementById("content").style.display="block";
 
+/* cards animate */
 document.querySelectorAll(".card").forEach((c,i)=>{
-setTimeout(()=>c.classList.add("show"),300*i);
+setTimeout(()=>c.classList.add("show"),i*400);
 });
 
-/* scroll reveal */
-const reveals=document.querySelectorAll(".reveal");
-
-function checkScroll(){
-reveals.forEach(el=>{
-const top=el.getBoundingClientRect().top;
-if(top<window.innerHeight-80){
-el.classList.add("show");
-}
+/* typewriter per paragraf */
+document.querySelectorAll(".typewriter").forEach((el,i)=>{
+setTimeout(()=>{
+typeEffect(el,el.dataset.text,32);
+},i*2500);
 });
-}
-
-window.addEventListener("scroll",checkScroll);
-checkScroll();
 
 /* music */
 const bgm=document.getElementById("bgm");
@@ -262,15 +295,16 @@ bgm.play().catch(()=>{});
 
 let v=0;
 let fade=setInterval(()=>{
-if(v<0.5){v+=0.03;bgm.volume=v;}
+if(v<0.5){v+=0.02;bgm.volume=v;}
 else clearInterval(fade);
-},150);
+},120);
 }
 
-/* stars move */
+/* subtle parallax */
 document.addEventListener("mousemove",(e)=>{
-document.getElementById("stars").style.transform=
-`translate(${e.clientX*0.01}px, ${e.clientY*0.01}px)`;
+const x=(e.clientX/window.innerWidth-0.5)*10;
+const y=(e.clientY/window.innerHeight-0.5)*10;
+stars.style.transform=`translate(${x}px,${y}px)`;
 });
 
 </script>
