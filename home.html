@@ -223,40 +223,43 @@ run();
 /* ENTER */
 document.getElementById("enterBtn").addEventListener("click", async ()=>{
 
-document.getElementById("cover").style.display="none";
-document.getElementById("content").style.display="block";
+  document.getElementById("cover").style.display="none";
+  document.getElementById("content").style.display="block";
 
-/* cards */
-document.querySelectorAll(".card").forEach((c,i)=>{
-setTimeout(()=>c.classList.add("show"),i*300);
+  const bgm = document.getElementById("bgm");
+
+  try {
+    bgm.volume = 0;
+
+    await bgm.play();
+
+    // fade in langsung
+    let v = 0;
+    let fade = setInterval(()=>{
+      if(v < 0.5){
+        v += 0.02;
+        bgm.volume = v;
+      } else {
+        clearInterval(fade);
+      }
+    },120);
+
+  } catch(err) {
+    console.log("audio error:", err);
+  }
+
+  // animasi card
+  document.querySelectorAll(".card").forEach((c,i)=>{
+    setTimeout(()=>c.classList.add("show"),i*300);
+  });
+
+  // typewriter tetap jalan
+  const paragraphs = document.querySelectorAll(".typewriter");
+
+  for(let el of paragraphs){
+    const text = el.dataset.text;
+    await typeEffect(el,text);
+    await new Promise(r=>setTimeout(r,600));
+  }
+
 });
-
-/* text full smooth */
-const paragraphs=document.querySelectorAll(".typewriter");
-
-for(let el of paragraphs){
-const text=el.dataset.text;
-await typeEffect(el,text);
-await new Promise(r=>setTimeout(r,600));
-}
-
-/* music FIX */
-const bgm=document.getElementById("bgm");
-bgm.volume=0;
-
-bgm.play().then(()=>{
-let v=0;
-let fade=setInterval(()=>{
-if(v<0.5){
-v+=0.02;
-bgm.volume=v;
-}else clearInterval(fade);
-},120);
-});
-
-});
-
-</script>
-
-</body>
-</html>
