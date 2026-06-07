@@ -89,8 +89,6 @@ border:none;
 border-radius:999px;
 background:white;
 cursor:pointer;
-z-index:10;
-position:relative;
 }
 
 /* CONTENT */
@@ -159,9 +157,9 @@ padding:60px 20px;
 <p class="subtitle">open this whenever life feels heavy</p>
 <button id="enterBtn">enter</button>
 </section>
-  
+
 <audio id="bgm" loop>
-<source src="beautiful boy.mp4" type="audio/mpeg">
+<source src="bgm.mp3" type="audio/mpeg">
 </audio>
 
 <div id="content">
@@ -171,7 +169,7 @@ padding:60px 20px;
 <p class="typewriter">hey bb ^^</p>
 
 <p class="typewriter">
-i know things have been really heavy for you lately. everything feels a lot sometimes, and i'm really proud of you for still going through it.
+i know things have been really heavy for you lately. everything feels a lot sometimes, but i'm really proud of you for still going.
 </p>
 
 <p class="typewriter">
@@ -240,38 +238,41 @@ setTimeout(typing,speed);
 typing();
 }
 
-/* OPEN SITE */
+/* OPEN SITE (FIX TOTAL CLEAN) */
 function openSite(){
 
 document.querySelector(".cover").style.display="none";
 document.getElementById("content").style.display="block";
 
-/* cards animation */
+/* cards */
 document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),i*300);
 });
 
-/* typewriter */
+/* typewriter FIX */
 const paragraphs=document.querySelectorAll(".typewriter");
 
 paragraphs.forEach(el=>{
-el.dataset.text=el.textContent.trim();
+el.dataset.text=el.textContent;
 el.textContent="";
 });
 
 let delay=500;
 
 paragraphs.forEach(el=>{
+const text=el.dataset.text;
+
 setTimeout(()=>{
-typeEffect(el,el.dataset.text,18);
+typeEffect(el,text,18);
 },delay);
 
-delay += el.dataset.text.length*18 + 600;
+delay += 2500;
 });
 
 /* music */
 const bgm=document.getElementById("bgm");
 bgm.volume=0;
+
 bgm.play().catch(()=>{});
 
 let v=0;
@@ -286,7 +287,7 @@ clearInterval(fade);
 
 }
 
-/* BUTTON EVENT (FIX UTAMA) */
+/* BUTTON */
 document.getElementById("enterBtn").addEventListener("click", openSite);
 
 </script>
