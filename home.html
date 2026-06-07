@@ -17,7 +17,7 @@ font-family:'Source Serif 4', serif;
 overflow-x:hidden;
 }
 
-/* STAR */
+/* BACKGROUND */
 .stars{
 position:fixed;
 inset:0;
@@ -40,20 +40,18 @@ animation:twinkle 6s infinite ease-in-out;
 50%{opacity:1;transform:scale(1.2);}
 }
 
-/* FALLING */
 #magic-layer{
 position:fixed;
 inset:0;
 pointer-events:none;
-overflow:hidden;
 z-index:1;
 }
 
 .magic{
 position:absolute;
 top:-20px;
-opacity:0;
 animation:fall linear forwards;
+opacity:0;
 }
 
 @keyframes fall{
@@ -70,7 +68,6 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:20px;
 position:relative;
 z-index:2;
 }
@@ -102,7 +99,7 @@ z-index:2;
 background:rgba(255,255,255,.85);
 margin:25px auto;
 padding:25px;
-max-width:900px;
+max-width:800px;
 border-radius:20px;
 box-shadow:0 10px 40px rgba(0,0,0,.08);
 opacity:0;
@@ -115,12 +112,11 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* TYPEWRITER */
+/* TEXT */
 .typewriter{
-font-size:1rem;
-line-height:1.9;
-margin-bottom:22px;
 white-space:pre-wrap;
+line-height:1.9;
+margin-bottom:20px;
 min-height:1em;
 }
 
@@ -128,15 +124,13 @@ min-height:1em;
 .track{
 display:flex;
 gap:20px;
-justify-content:center;
 flex-wrap:wrap;
+justify-content:center;
 }
 
 .track img{
 width:45%;
-max-width:320px;
 border-radius:16px;
-object-fit:cover;
 }
 
 /* END */
@@ -169,15 +163,15 @@ padding:60px 20px;
 <p class="typewriter">hey bb ^^</p>
 
 <p class="typewriter">
-i know things have been really heavy for you lately. everything feels a lot sometimes, but i'm really proud of you for still going.
+i know things have been really heavy for you lately. i know you're tired, but i'm proud of you for still going.
 </p>
 
 <p class="typewriter">
-you don't have to carry everything alone. i'm here with you.
+you don't have to carry everything alone. i'm here.
 </p>
 
 <p class="typewriter">
-no matter what happens, i'm proud of you 🤍
+no matter what happens, i'm always proud of you 🤍
 </p>
 
 </div>
@@ -207,39 +201,40 @@ s.style.top=Math.random()*100+"%";
 stars.appendChild(s);
 }
 
-/* FALLING */
+/* MAGIC */
 function createMagic(){
 const el=document.createElement("div");
 el.className="magic";
-
 const items=["✨","🤍","💗","💫"];
 el.innerText=items[Math.floor(Math.random()*items.length)];
-
 el.style.left=Math.random()*100+"vw";
 el.style.fontSize=(Math.random()*14+10)+"px";
 el.style.animationDuration=(Math.random()*4+4)+"s";
-
 document.getElementById("magic-layer").appendChild(el);
 setTimeout(()=>el.remove(),8000);
 }
 setInterval(createMagic,350);
 
-/* TYPEWRITER */
-function typeEffect(el,text,speed){
+/* TYPEWRITER FIX STABLE */
+function typeEffect(el,text){
+return new Promise(resolve=>{
 let i=0;
 el.textContent="";
-function typing(){
+
+function run(){
 if(i<text.length){
-el.textContent+=text[i];
-i++;
-setTimeout(typing,speed);
+el.textContent+=text[i++];
+setTimeout(run,18);
+}else{
+resolve();
 }
 }
-typing();
+run();
+});
 }
 
-/* OPEN SITE (FIX TOTAL CLEAN) */
-function openSite(){
+/* MAIN */
+document.getElementById("enterBtn").addEventListener("click", async ()=>{
 
 document.querySelector(".cover").style.display="none";
 document.getElementById("content").style.display="block";
@@ -249,32 +244,21 @@ document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),i*300);
 });
 
-/* typewriter FIX */
+/* TEXT SEQUENTIAL (NO BUG) */
 const paragraphs=document.querySelectorAll(".typewriter");
 
-paragraphs.forEach(el=>{
-el.dataset.text=el.textContent;
+for(let el of paragraphs){
+const text=el.textContent;
 el.textContent="";
-});
+await typeEffect(el,text);
+await new Promise(r=>setTimeout(r,300));
+}
 
-let delay=500;
-
-paragraphs.forEach(el=>{
-const text=el.dataset.text;
-
-setTimeout(()=>{
-typeEffect(el,text,18);
-},delay);
-
-delay += 2500;
-});
-
-/* music */
+/* MUSIC STABLE */
 const bgm=document.getElementById("bgm");
 bgm.volume=0;
 
-bgm.play().catch(()=>{});
-
+bgm.play().then(()=>{
 let v=0;
 let fade=setInterval(()=>{
 if(v<0.5){
@@ -284,11 +268,9 @@ bgm.volume=v;
 clearInterval(fade);
 }
 },120);
+}).catch(()=>{});
 
-}
-
-/* BUTTON */
-document.getElementById("enterBtn").addEventListener("click", openSite);
+});
 
 </script>
 
