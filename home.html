@@ -108,7 +108,6 @@ border-radius:20px;
 box-shadow:0 10px 40px rgba(0,0,0,.08);
 }
 
-/* text */
 .typewriter{
 white-space:pre-wrap;
 line-height:1.9;
@@ -116,7 +115,6 @@ margin-bottom:20px;
 min-height:1em;
 }
 
-/* images */
 .track{
 display:flex;
 gap:20px;
@@ -130,7 +128,6 @@ border-radius:16px;
 object-fit:cover;
 }
 
-/* end */
 .end{
 text-align:center;
 padding:60px 20px;
@@ -143,14 +140,14 @@ padding:60px 20px;
 <div class="stars" id="stars"></div>
 <div id="magic-layer"></div>
 
-<section class="cover">
+<section class="cover" id="cover">
 <h1>for my حبيبي 🤍</h1>
 <p class="subtitle">open this whenever life feels heavy</p>
 <button id="enterBtn">enter</button>
 </section>
 
 <audio id="bgm" loop>
-<source src="beautiful boy.mp3" type="audio/mpeg">
+<source src="beautiful boy.mp4" type="audio/mp4">
 </audio>
 
 <div id="content">
@@ -208,7 +205,7 @@ setTimeout(()=>el.remove(),8000);
 }
 setInterval(createMagic,350);
 
-/* typewriter SAFE */
+/* typewriter FIX FULL */
 function typeEffect(el,text){
 return new Promise(resolve=>{
 let i=0;
@@ -223,27 +220,27 @@ run();
 });
 }
 
-/* MAIN */
+/* ENTER */
 document.getElementById("enterBtn").addEventListener("click", async ()=>{
 
-document.querySelector(".cover").style.display="none";
+document.getElementById("cover").style.display="none";
 document.getElementById("content").style.display="block";
 
-/* cards appear */
+/* cards */
 document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),i*300);
 });
 
-/* typewriter sequential (NO BUG) */
+/* text full smooth */
 const paragraphs=document.querySelectorAll(".typewriter");
 
 for(let el of paragraphs){
 const text=el.dataset.text;
 await typeEffect(el,text);
-await new Promise(r=>setTimeout(r,800));
+await new Promise(r=>setTimeout(r,600));
 }
 
-/* music */
+/* music FIX */
 const bgm=document.getElementById("bgm");
 bgm.volume=0;
 
@@ -258,6 +255,7 @@ bgm.volume=v;
 });
 
 });
+
 </script>
 
 </body>
