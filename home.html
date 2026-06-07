@@ -17,7 +17,7 @@ font-family:'Source Serif 4', serif;
 overflow-x:hidden;
 }
 
-/* stars */
+/* STAR */
 .stars{
 position:fixed;
 inset:0;
@@ -40,7 +40,7 @@ animation:twinkle 6s infinite ease-in-out;
 50%{opacity:1;transform:scale(1.2);}
 }
 
-/* falling */
+/* FALLING */
 #magic-layer{
 position:fixed;
 inset:0;
@@ -62,7 +62,7 @@ animation:fall linear forwards;
 100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
 }
 
-/* cover */
+/* COVER */
 .cover{
 height:100vh;
 display:flex;
@@ -89,9 +89,11 @@ border:none;
 border-radius:999px;
 background:white;
 cursor:pointer;
+z-index:10;
+position:relative;
 }
 
-/* content */
+/* CONTENT */
 #content{
 display:none;
 position:relative;
@@ -115,7 +117,7 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* typewriter */
+/* TYPEWRITER */
 .typewriter{
 font-size:1rem;
 line-height:1.9;
@@ -124,7 +126,7 @@ white-space:pre-wrap;
 min-height:1em;
 }
 
-/* images */
+/* IMAGE */
 .track{
 display:flex;
 gap:20px;
@@ -139,7 +141,7 @@ border-radius:16px;
 object-fit:cover;
 }
 
-/* end */
+/* END */
 .end{
 text-align:center;
 padding:60px 20px;
@@ -152,10 +154,10 @@ padding:60px 20px;
 <div class="stars" id="stars"></div>
 <div id="magic-layer"></div>
 
-<section class="cover" id="cover">
+<section class="cover">
 <h1>for my حبيبي 🤍</h1>
 <p class="subtitle">open this whenever life feels heavy</p>
-<button onclick="openSite()">enter</button>
+<button id="enterBtn">enter</button>
 </section>
 
 <audio id="bgm" loop>
@@ -169,19 +171,15 @@ padding:60px 20px;
 <p class="typewriter">hey bb ^^</p>
 
 <p class="typewriter">
-i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it.
+i know things have been really heavy for you lately. everything feels a lot sometimes, and i'm really proud of you for still going through it.
 </p>
 
 <p class="typewriter">
-that's why i need you to know something, bb. i'm so proud of you. not because of results, but because of how far you've come already.
+you don't have to carry everything alone. i'm here with you.
 </p>
 
 <p class="typewriter">
-you don't have to earn my love. i'm already proud of you.
-</p>
-
-<p class="typewriter">
-let me be your support system when things get heavy. i'll always be here for you 🤍
+no matter what happens, i'm proud of you 🤍
 </p>
 
 </div>
@@ -201,7 +199,7 @@ let me be your support system when things get heavy. i'll always be here for you
 
 <script>
 
-/* stars */
+/* STAR */
 const stars=document.getElementById("stars");
 for(let i=0;i<80;i++){
 let s=document.createElement("div");
@@ -211,7 +209,7 @@ s.style.top=Math.random()*100+"%";
 stars.appendChild(s);
 }
 
-/* falling */
+/* FALLING */
 function createMagic(){
 const el=document.createElement("div");
 el.className="magic";
@@ -228,11 +226,10 @@ setTimeout(()=>el.remove(),8000);
 }
 setInterval(createMagic,350);
 
-/* typewriter */
+/* TYPEWRITER */
 function typeEffect(el,text,speed){
 let i=0;
 el.textContent="";
-
 function typing(){
 if(i<text.length){
 el.textContent+=text[i];
@@ -243,10 +240,10 @@ setTimeout(typing,speed);
 typing();
 }
 
-/* FIXED OPEN SITE */
+/* OPEN SITE */
 function openSite(){
 
-document.getElementById("cover").style.display="none";
+document.querySelector(".cover").style.display="none";
 document.getElementById("content").style.display="block";
 
 /* cards animation */
@@ -254,7 +251,7 @@ document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),i*300);
 });
 
-/* typewriter clean */
+/* typewriter */
 const paragraphs=document.querySelectorAll(".typewriter");
 
 paragraphs.forEach(el=>{
@@ -288,6 +285,9 @@ clearInterval(fade);
 },120);
 
 }
+
+/* BUTTON EVENT (FIX UTAMA) */
+document.getElementById("enterBtn").addEventListener("click", openSite);
 
 </script>
 
