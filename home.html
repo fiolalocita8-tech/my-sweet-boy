@@ -17,7 +17,7 @@ font-family:'Source Serif 4', serif;
 overflow-x:hidden;
 }
 
-/* STARS */
+/* stars */
 .stars{
 position:fixed;
 inset:0;
@@ -40,7 +40,7 @@ animation:twinkle 6s infinite ease-in-out;
 50%{opacity:1;transform:scale(1.2);}
 }
 
-/* FALLING */
+/* falling */
 #magic-layer{
 position:fixed;
 inset:0;
@@ -62,7 +62,7 @@ animation:fall linear forwards;
 100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
 }
 
-/* COVER */
+/* cover */
 .cover{
 height:100vh;
 display:flex;
@@ -91,7 +91,7 @@ background:white;
 cursor:pointer;
 }
 
-/* CONTENT */
+/* content */
 #content{
 display:none;
 position:relative;
@@ -115,7 +115,7 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* TYPEWRITER */
+/* typewriter */
 .typewriter{
 font-size:1rem;
 line-height:1.9;
@@ -124,7 +124,7 @@ white-space:pre-wrap;
 min-height:1em;
 }
 
-/* MEMORIES */
+/* images */
 .track{
 display:flex;
 gap:20px;
@@ -139,7 +139,7 @@ border-radius:16px;
 object-fit:cover;
 }
 
-/* END */
+/* end */
 .end{
 text-align:center;
 padding:60px 20px;
@@ -159,31 +159,29 @@ padding:60px 20px;
 </section>
 
 <audio id="bgm" loop>
-<source src="John Lennon - Beautiful Boy (Darling Boy) - Instrumental.mp4">
+<source src="John Lennon - Beautiful Boy - Instrumental.mp4">
 </audio>
 
 <div id="content">
 
 <div class="card">
 
+<p class="typewriter">hey bb ^^</p>
+
 <p class="typewriter">
-hey bb ^^
+i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it.
 </p>
 
 <p class="typewriter">
-i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it. i know you don't always talk about everything you're feeling, but i can tell you've been carrying a lot on your shoulders lately. and honestly, i wish i could take some of that weight away from you 🥹🥹
+that's why i need you to know something, bb. i'm so proud of you. not because of results, but because of how far you've come already.
 </p>
 
 <p class="typewriter">
-that's why i need you to know something, bb. i'm so proud of you. not because of the results, not because everything is going perfectly, but because of everything you've been doing to get there. i see how hard you've been trying, even when life keeps throwing things at you. sometimes you're so focused on the destination that you forget how far you've already come, and the process you're going through right now is already something to be proud of.
+you don't have to earn my love. i'm already proud of you.
 </p>
 
 <p class="typewriter">
-you don't have to earn my love by being successful, bb. i'm already proud of you, even in the middle of all this. and when your mind gets too loud and you start doubting yourself, look at me, okay? you have me.
-</p>
-
-<p class="typewriter">
-let me be your support system when things get heavy. we'll get through all of this together, one step at a time. no matter what happens, i'll always be proud of you—not just for what you achieve, but for the person you are and the strength you show every single day 🥹🥹🥹🥹🥹🥹🫶🏻🫶🏻🫶🏻🤍🤍🤍🤍🤍🤍💗💗💗💗💗
+let me be your support system when things get heavy. i'll always be here for you 🤍
 </p>
 
 </div>
@@ -230,7 +228,7 @@ setTimeout(()=>el.remove(),8000);
 }
 setInterval(createMagic,350);
 
-/* TYPEWRITER FIX (INI YANG PENTING) */
+/* typewriter */
 function typeEffect(el,text,speed){
 let i=0;
 el.textContent="";
@@ -245,117 +243,50 @@ setTimeout(typing,speed);
 typing();
 }
 
-/* OPEN */
-function openSite(){
+/* FIXED OPEN SITE */
 function openSite(){
 
 document.getElementById("cover").style.display="none";
 document.getElementById("content").style.display="block";
 
-/* show cards */
-
+/* cards animation */
 document.querySelectorAll(".card").forEach((c,i)=>{
-setTimeout(()=>{
-c.classList.add("show");
-},i*300);
+setTimeout(()=>c.classList.add("show"),i*300);
 });
 
-/* typewriter */
-
+/* typewriter clean */
 const paragraphs=document.querySelectorAll(".typewriter");
 
 paragraphs.forEach(el=>{
-
 el.dataset.text=el.textContent.trim();
-
 el.textContent="";
-
 });
 
 let delay=500;
 
 paragraphs.forEach(el=>{
-
 setTimeout(()=>{
-
-typeEffect(
-el,
-el.dataset.text,
-18
-);
-
+typeEffect(el,el.dataset.text,18);
 },delay);
 
-delay += (el.dataset.text.length * 18) + 600;
-
+delay += el.dataset.text.length*18 + 600;
 });
 
 /* music */
-
 const bgm=document.getElementById("bgm");
-
 bgm.volume=0;
-
 bgm.play().catch(()=>{});
 
 let v=0;
-
 let fade=setInterval(()=>{
-
 if(v<0.5){
-
 v+=0.02;
 bgm.volume=v;
-
 }else{
-
 clearInterval(fade);
-
 }
-
 },120);
 
-}
-
-/* cards */
-const paragraphs=document.querySelectorAll(".typewriter");
-
-paragraphs.forEach(el=>{
-
-el.dataset.text=el.textContent.trim();
-
-el.textContent="";
-
-});
-
-let delay=500;
-
-paragraphs.forEach(el=>{
-
-setTimeout(()=>{
-
-typeEffect(
-el,
-el.dataset.text,
-18
-);
-
-},delay);
-
-delay += (el.dataset.text.length*18)+600;
-
-});
-
-/* music */
-const bgm=document.getElementById("bgm");
-bgm.volume=0;
-bgm.play().catch(()=>{});
-
-let v=0;
-let fade=setInterval(()=>{
-if(v<0.5){v+=0.02;bgm.volume=v;}
-else clearInterval(fade);
-},120);
 }
 
 </script>
