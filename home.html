@@ -103,6 +103,8 @@ box-shadow:0 10px 40px rgba(0,0,0,.08);
 
 .typewriter{
 white-space:pre-wrap;
+word-break:break-word;
+overflow-wrap:break-word;
 line-height:1.9;
 margin-bottom:20px;
 min-height:1em;
@@ -148,9 +150,13 @@ padding:60px 20px;
 <div class="card">
 
 <p class="typewriter" data-text="hey bb ^^"></p>
-<p class="typewriter" data-text="i know things have been really heavy for you lately..."></p>
+
+<p class="typewriter" data-text="i know things have been really heavy for you lately."></p>
+
 <p class="typewriter" data-text="i'm so proud of you no matter what happens 🤍"></p>
+
 <p class="typewriter" data-text="you don't have to carry everything alone."></p>
+
 <p class="typewriter" data-text="im standing here 4 u 🤍"></p>
 
 </div>
@@ -170,9 +176,8 @@ padding:60px 20px;
 
 <script>
 
-/* SAFE STARS (no crash) */
+/* stars SAFE */
 const stars = document.getElementById("stars");
-
 if(stars){
   for(let i=0;i<80;i++){
     let s=document.createElement("div");
@@ -183,7 +188,7 @@ if(stars){
   }
 }
 
-/* MAGIC */
+/* magic */
 function createMagic(){
   const el=document.createElement("div");
   el.className="magic";
@@ -197,7 +202,7 @@ function createMagic(){
 }
 setInterval(createMagic,350);
 
-/* TYPEWRITER */
+/* typewriter SAFE */
 function typeEffect(el,text){
 return new Promise(resolve=>{
 let i=0;
@@ -212,7 +217,7 @@ run();
 });
 }
 
-/* ENTER FIX FINAL */
+/* ENTER FINAL STABLE */
 document.getElementById("enterBtn").addEventListener("click", async ()=>{
 
 document.getElementById("cover").style.display="none";
@@ -220,45 +225,35 @@ document.getElementById("content").style.display="block";
 
 const bgm = document.getElementById("bgm");
 
-/* unlock audio (Safari fix) */
+/* music start */
 try{
-bgm.volume=0;
-await bgm.play();
-bgm.pause();
-bgm.currentTime=0;
-}catch(e){
-console.log("unlock error:", e);
-}
-
-/* music langsung play */
-try{
+bgm.volume = 0;
 await bgm.play();
 
-let v=0;
-bgm.volume=0;
-
-let fade=setInterval(()=>{
-if(v<0.5){
-v+=0.02;
-bgm.volume=v;
+let v = 0;
+let fade = setInterval(()=>{
+if(v < 0.5){
+v += 0.02;
+bgm.volume = v;
 }else clearInterval(fade);
 },120);
 
 }catch(e){
-console.log("play error:", e);
+console.log("audio error:", e);
 }
 
 /* cards */
 document.querySelectorAll(".card").forEach((c,i)=>{
-setTimeout(()=>c.classList.add("show"),i*300);
+setTimeout(()=>c.classList.add("show"), i*200);
 });
 
-/* text */
-const paragraphs=document.querySelectorAll(".typewriter");
+/* TEXT SAFE LOOP */
+const paragraphs = Array.from(document.querySelectorAll(".typewriter"));
 
-for(let el of paragraphs){
-await typeEffect(el, el.dataset.text);
-await new Promise(r=>setTimeout(r,600));
+for(const el of paragraphs){
+const text = el.dataset.text || "";
+await typeEffect(el, text);
+await new Promise(r=>setTimeout(r,400));
 }
 
 });
