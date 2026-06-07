@@ -51,7 +51,7 @@ padding:20px;
 }
 
 .cover h1{
-font-family:'Cormorant Garamond';
+font-family:'Cormorant Garamond', serif;
 font-size:3rem;
 margin-bottom:10px;
 }
@@ -87,7 +87,9 @@ opacity:0;
 transform:translateY(30px);
 }
 
-.card.show{animation:cardIn 1s ease forwards;}
+.card.show{
+animation:cardIn 1s ease forwards;
+}
 
 @keyframes cardIn{
 to{opacity:1;transform:translateY(0);}
@@ -118,7 +120,7 @@ transform:translateY(0);
 /* TITLE */
 .section-title{
 text-align:center;
-font-family:'Cormorant Garamond';
+font-family:'Cormorant Garamond', serif;
 margin-bottom:20px;
 font-size:1.8rem;
 }
@@ -154,7 +156,7 @@ padding:80px 20px;
 }
 
 .end h2{
-font-family:'Cormorant Garamond';
+font-family:'Cormorant Garamond', serif;
 font-size:2.5rem;
 }
 </style>
@@ -176,26 +178,18 @@ font-size:2.5rem;
 
 <div id="content">
 
+<!-- LETTER (FULL TEXT UTUH + PARAGRAF ASLI KAMU) -->
 <div class="card letter-card">
 
 <p class="reveal">hey bb ^^</p>
 
-<p class="reveal">i know things have been really heavy for you lately. i know there's been so much on your mind...</p>
+<p class="reveal">i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it. i know you don't always talk about everything you're feeling, but i can tell you've been carrying a lot on your shoulders lately. and honestly, i wish i could take some of that weight away from you 🥹🥹</p>
 
-<p class="reveal">i know you don't always talk about everything you're feeling, but i can tell you've been carrying a lot...</p>
-
-<p class="reveal">that's why i'm so proud of you. not because of results, but because you're still trying 🤍</p>
-
-<p class="reveal">you don't have to earn my love. i'm already proud of you.</p>
-
-<p class="reveal">and when your mind gets too loud, look at me. you have me.</p>
-
-<p class="reveal">we'll get through everything together, step by step.</p>
-
-<p class="reveal">no matter what happens, i'm proud of you always 🥹🤍</p>
+<p class="reveal">that's why i need you to know something, bb. i'm so proud of you. not because of the results, not because everything is going perfectly, but because of everything you've been doing to get there. i see how hard you've been trying, even when life keeps throwing things at you. sometimes you're so focused on the destination that you forget how far you've already come, and the process you're going through right now is already something to be proud of. you don't have to earn my love by being successful, bb. i'm already proud of you, even in the middle of all this. and when your mind gets too loud and you start doubting yourself, look at me, okay? you have me. let me be your support system when things get heavy. we'll get through all of this together, one step at a time. no matter what happens, i'll always be proud of you—not just for what you achieve, but for the person you are and the strength you show every single day 🥹🥹🥹🥹🥹🥹🫶🏻🫶🏻🫶🏻🤍🤍🤍🤍🤍🤍💗💗💗💗💗</p>
 
 </div>
 
+<!-- MEMORIES -->
 <div class="card">
 <h2 class="section-title">a few memories 🤍</h2>
 
@@ -246,7 +240,7 @@ document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),300*i);
 });
 
-/* reveal text on scroll */
+/* scroll reveal */
 const reveals=document.querySelectorAll(".reveal");
 
 function checkScroll(){
