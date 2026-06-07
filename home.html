@@ -17,7 +17,7 @@ font-family:'Source Serif 4', serif;
 overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* stars */
 .stars{
 position:fixed;
 inset:0;
@@ -40,6 +40,7 @@ animation:twinkle 6s infinite ease-in-out;
 50%{opacity:1;transform:scale(1.2);}
 }
 
+/* magic */
 #magic-layer{
 position:fixed;
 inset:0;
@@ -60,7 +61,7 @@ opacity:0;
 100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
 }
 
-/* COVER */
+/* cover */
 .cover{
 height:100vh;
 display:flex;
@@ -78,7 +79,10 @@ font-size:3rem;
 margin-bottom:10px;
 }
 
-.subtitle{opacity:.8;margin-bottom:20px;}
+.subtitle{
+opacity:.8;
+margin-bottom:20px;
+}
 
 button{
 padding:14px 30px;
@@ -88,7 +92,7 @@ background:white;
 cursor:pointer;
 }
 
-/* CONTENT */
+/* content */
 #content{
 display:none;
 position:relative;
@@ -102,17 +106,9 @@ padding:25px;
 max-width:800px;
 border-radius:20px;
 box-shadow:0 10px 40px rgba(0,0,0,.08);
-opacity:0;
-transform:translateY(30px);
-transition:.6s;
 }
 
-.card.show{
-opacity:1;
-transform:translateY(0);
-}
-
-/* TEXT */
+/* text */
 .typewriter{
 white-space:pre-wrap;
 line-height:1.9;
@@ -120,20 +116,21 @@ margin-bottom:20px;
 min-height:1em;
 }
 
-/* IMAGE */
+/* images */
 .track{
 display:flex;
 gap:20px;
-flex-wrap:wrap;
 justify-content:center;
+flex-wrap:wrap;
 }
 
 .track img{
 width:45%;
 border-radius:16px;
+object-fit:cover;
 }
 
-/* END */
+/* end */
 .end{
 text-align:center;
 padding:60px 20px;
@@ -153,33 +150,29 @@ padding:60px 20px;
 </section>
 
 <audio id="bgm" loop>
-<source src="beautiful boy.mp3" type="audio/mpeg">
+<source src="beautiful boy.mp4" type="audio/mpeg">
 </audio>
 
 <div id="content">
 
 <div class="card">
 
-<p class="typewriter">hey bb ^^</p>
+<p class="typewriter" data-text="hey bb ^^"></p>
 
-<p class="typewriter">
-i know things have been really heavy for you lately. i know you're tired, but i'm proud of you for still going.
-</p>
+<p class="typewriter" data-text="i know things have been really heavy for you lately. i know there's been so much on your mind, and sometimes it probably feels like everything is happening all at once. the interviews, the uncertainty, taking care of your mom, going back and forth to the hospital, and still trying to keep yourself together through all of it. and honestly, i wish i could take some of that weight away from you 🥹🥹"></p>
 
-<p class="typewriter">
-you don't have to carry everything alone. i'm here.
-</p>
+<p class="typewriter" data-text="that's why i need you to know something, bb. i'm so proud of you. not because of results, but because of how hard you're still trying. even when life feels heavy, you're still here going forward."></p>
 
-<p class="typewriter">
-no matter what happens, i'm always proud of you 🤍
-</p>
+<p class="typewriter" data-text="you don't have to carry everything alone. i'm here with you, always. you don't have to earn love by being perfect."></p>
+
+<p class="typewriter" data-text="let me be your support system when things get heavy. we'll get through all of this together, one step at a time. no matter what happens, i'll always be proud of you 🤍"></p>
 
 </div>
 
 <div class="card">
 <div class="track">
 <img src="IMG_5896.jpeg">
-<img src="IMG_5902.jpeg">
+<img src="IMG_5909.jpeg">
 </div>
 </div>
 
@@ -191,7 +184,7 @@ no matter what happens, i'm always proud of you 🤍
 
 <script>
 
-/* STAR */
+/* stars */
 const stars=document.getElementById("stars");
 for(let i=0;i<80;i++){
 let s=document.createElement("div");
@@ -201,7 +194,7 @@ s.style.top=Math.random()*100+"%";
 stars.appendChild(s);
 }
 
-/* MAGIC */
+/* magic */
 function createMagic(){
 const el=document.createElement("div");
 el.className="magic";
@@ -215,19 +208,16 @@ setTimeout(()=>el.remove(),8000);
 }
 setInterval(createMagic,350);
 
-/* TYPEWRITER FIX STABLE */
+/* typewriter SAFE */
 function typeEffect(el,text){
 return new Promise(resolve=>{
 let i=0;
 el.textContent="";
-
 function run(){
 if(i<text.length){
 el.textContent+=text[i++];
 setTimeout(run,18);
-}else{
-resolve();
-}
+}else resolve();
 }
 run();
 });
@@ -239,22 +229,21 @@ document.getElementById("enterBtn").addEventListener("click", async ()=>{
 document.querySelector(".cover").style.display="none";
 document.getElementById("content").style.display="block";
 
-/* cards */
+/* cards appear */
 document.querySelectorAll(".card").forEach((c,i)=>{
 setTimeout(()=>c.classList.add("show"),i*300);
 });
 
-/* TEXT SEQUENTIAL (NO BUG) */
+/* typewriter sequential (NO BUG) */
 const paragraphs=document.querySelectorAll(".typewriter");
 
 for(let el of paragraphs){
-const text=el.textContent;
-el.textContent="";
+const text=el.dataset.text;
 await typeEffect(el,text);
-await new Promise(r=>setTimeout(r,300));
+await new Promise(r=>setTimeout(r,800));
 }
 
-/* MUSIC STABLE */
+/* music */
 const bgm=document.getElementById("bgm");
 bgm.volume=0;
 
@@ -264,14 +253,11 @@ let fade=setInterval(()=>{
 if(v<0.5){
 v+=0.02;
 bgm.volume=v;
-}else{
-clearInterval(fade);
-}
+}else clearInterval(fade);
 },120);
-}).catch(()=>{});
-
 });
 
+});
 </script>
 
 </body>
